@@ -1,6 +1,6 @@
 # CanPermits PostGIS lab
 
-An independent practice workspace based on spatial problems in the private CanPermits source checkout. Each exercise uses synthetic data and has no solution in its prompt.
+My personal PostGIS practice and portfolio workspace, based on spatial problems in the private CanPermits source checkout. [CanPermits](https://canpermits.com/) was a Canadian building permit aggregation platform I previously operated; its site is now an archived demonstration. Each exercise uses synthetic data and has no solution in its prompt.
 
 The public presentation is an Astro site built from these same files. Run `npm ci && npm run dev` to preview it locally. The site includes source context, a paired before/after evidence view, syntax-highlighted SQL, and line annotations that appear on hover, keyboard focus, or click. GitHub Actions publishes the static build to GitHub Pages.
 
@@ -9,7 +9,8 @@ The public presentation is an Astro site built from these same files. Run `npm c
 1. Start a disposable database with `docker compose up -d`.
 2. Open an exercise `README.md` and run its `schema.sql` and `fixtures.sql` in a fresh scratch database or schema.
 3. Write your answer in `attempt.sql`; record observed results in `tests.md`.
-4. Only after your attempt, inspect the source files listed in the prompt and write `reflection.md`.
+4. Use the populated `tests.md` cases to check your work and record observed results.
+5. Only after your attempt, inspect the source files listed in the prompt and write `reflection.md`.
 
 Example for exercise 01, using a fresh database:
 
@@ -21,6 +22,8 @@ docker compose exec -T db psql -U lab -d lab_01 < exercises/01-coordinate-qualit
 ```
 
 Exercise schemas are independent. Keep each exercise in its own database so names and data cannot collide. The CanPermits source is at `../canpermits-reverse-engineering`; its implementation is an answer key to read later.
+
+There are 90 prepared test cases, five per exercise. Some have a fixed expected result; others ask you to document an engineering policy and verify that your SQL applies it consistently. Test cases describe inputs and observations, not completed SQL.
 
 ## Present your solution
 

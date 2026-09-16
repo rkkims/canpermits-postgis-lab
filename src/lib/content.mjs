@@ -4,6 +4,20 @@ import YAML from 'yaml';
 
 export const exerciseRoot = join(process.cwd(), 'exercises');
 const read = (path) => readFileSync(path, 'utf8');
+const parseTestCases = (markdown, folder) => {
+  const rows = markdown.split('\n').filter((line) => line.startsWith('|'));
+  if (rows.length < 3) throw new Error(`${folder}: tests.md needs a table with cases`);
+  const cells = (line) => line.slice(1, -1).split('|').map((value) => value.trim());
+  const headings = cells(rows[0]);
+  if (headings.join(',') !== 'Case,Input or setup,Expected behavior or evidence,Observed,Pass?')
+    throw new Error(`${folder}: unexpected tests.md headings`);
+  return rows.slice(2).map((line, index) => {
+    const values = cells(line);
+    if (values.length !== 5 || !values[0] || !values[1] || !values[2])
+      throw new Error(`${folder}: incomplete test case at row ${index + 1}`);
+    return { case: values[0], input: values[1], expected: values[2], observed: values[3], pass: values[4] };
+  });
+};
 const section = (text, heading) => {
   const start = text.indexOf(`## ${heading}\n`);
   if (start < 0) return '';
@@ -42,6 +56,7 @@ export function listExercises() {
         schema: read(join(dir, 'schema.sql')),
         fixtures: read(join(dir, 'fixtures.sql')),
         attempt: read(join(dir, 'attempt.sql')),
+        tests: parseTestCases(read(join(dir, 'tests.md')), folder),
         evidence,
       };
     }).sort((a, b) => a.number.localeCompare(b.number));
