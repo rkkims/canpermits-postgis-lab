@@ -1,0 +1,23 @@
+---
+import { parse } from 'csv-parse/sync';
+import { readEvidenceFile, evidenceImage } from '../lib/content.mjs';
+const { exercise, side } = Astro.props;
+const item = exercise.evidence?.[side] ?? {};
+let rows = null;
+let columns = [];
+if (item.csv) {
+  rows = parse(readEvidenceFile(exercise, item.csv), { columns: true, skip_empty_lines: true });
+  columns = rows.length ? Object.keys(rows[0]) : [];
+}
+const image = item.image ? evidenceImage(exercise, item.image) : null;
+---
+<article class:list={['evidence-card', side]}>
+  <div class="evidence-head"><span class="step-label">{side === 'before' ? '01 · BEFORE' : '02 · AFTER'}</span><h3>{item.title ?? (side === 'before' ? 'Input' : 'Output')}</h3></div>
+  <p>{item.description ?? ''}</p>
+  {rows && <div class="table-scroll"><table><thead><tr>{columns.map((col) => <th>{col}</th>)}</tr></thead><tbody>{rows.slice(0, 12).map((row) => <tr>{columns.map((col) => <td>{row[col] || 'NULL'}</td>)}</tr>)}</tbody></table>{rows.length > 12 && <small>Showing 12 of {rows.length} rows</small>}</div>}
+  {image && <img src={image} alt={item.alt ?? `${side} evidence for ${exercise.title}`} loading="lazy" />}
+  {!rows && !image && <div class="evidence-empty">{side === 'before' ? 'View the runnable fixture SQL below.' : 'Your result will appear here when you attach after.csv or an image.'}</div>}
+</article>
+<style>
+  .evidence-card{background:#fff;border:1px solid #d4e0dc;border-radius:14px;padding:1.15rem;min-width:0}.evidence-card.after{background:#f0f7f3;border-color:#c0dcd3}.evidence-head{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap}.step-label{font-size:.63rem;letter-spacing:.15em;color:#167a77;font-weight:700}.evidence-head h3{margin:.1rem 0;font-size:1rem}.evidence-card p{margin:.4rem 0 1rem;color:#5d7378;font-size:.84rem}.table-scroll{overflow-x:auto}table{width:100%;border-collapse:collapse;font:12px/1.4 'DM Mono',monospace}th,td{text-align:left;padding:.45rem .55rem;border-bottom:1px solid #e2eae5;white-space:nowrap}th{color:#5d7378;background:#f5f8f4}small{color:#5d7378}.evidence-card img{max-width:100%;height:auto;border-radius:8px;border:1px solid #d4e0dc}.evidence-empty{border:1px dashed #bbd1c9;border-radius:9px;padding:1.1rem;color:#6d8381;font-size:.8rem}
+</style>

@@ -1,0 +1,12 @@
+- lines: 2
+  anchor: "-79.38,43.65"
+  title: Plausible source point
+  why: "This synthetic Toronto point gives the exercise a usable baseline for comparing rejected input."
+- lines: 3
+  anchor: "43.65,-79.38"
+  title: Coordinate order trap
+  why: "This row reverses the two values. A database can accept numeric coordinates that describe the wrong place."
+- lines: 4-5
+  anchor: "0,0"
+  title: Missing and sentinel locations
+  why: "These rows test whether the workflow distinguishes absent location from an implausible source coordinate."

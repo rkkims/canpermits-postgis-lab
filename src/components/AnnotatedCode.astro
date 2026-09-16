@@ -1,0 +1,64 @@
+---
+import { highlightedLines } from '../lib/highlight.mjs';
+const { code, filename, notes = [], id, emptyMessage = '' } = Astro.props;
+const lines = highlightedLines(code);
+const notesFor = (line) => notes.filter((note) => note.start <= line && note.end >= line);
+---
+<section class="code-card" id={id} data-code-card>
+  <div class="code-toolbar"><span class="filename"><span class="file-dot"></span>{filename}</span><button type="button" class="copy-button" data-copy>Copy SQL</button></div>
+  {emptyMessage && <div class="empty-banner">{emptyMessage}</div>}
+  <div class="code-scroll" aria-label={`SQL file ${filename}`}>
+    {lines.map((tokens, index) => {
+      const lineNumber = index + 1;
+      const lineNotes = notesFor(lineNumber);
+      return <div class:list={['code-line', { annotated: lineNotes.length > 0 }]} data-line={lineNumber}>
+        <button type="button" class="line-button" data-line-button={lineNotes.length ? lineNumber : undefined} aria-label={lineNotes.length ? `Line ${lineNumber}: ${lineNotes.map((note) => note.title).join(', ')}` : `Line ${lineNumber}`} title={lineNotes.length ? 'Hover or click for reasoning' : undefined}>
+          <span class="line-number">{lineNumber}</span><span class="line-content"><code>{tokens.map((token) => <span style={`color:${token.color ?? '#e1e4e8'}`}>{token.content}</span>)}</code></span>{lineNotes.length > 0 && <span class="note-dot" aria-hidden="true">●</span>}
+          {lineNotes.length > 0 && <span class="line-tooltip" role="tooltip">{lineNotes[0].title}: {lineNotes[0].why}</span>}
+        </button>
+      </div>;
+    })}
+  </div>
+  <div class="reasoning-panel" aria-live="polite">
+    <div class="reasoning-label">LINE NOTES</div>
+    <div data-note-display>{notes.length ? 'Hover or select a marked line to read why it was written that way.' : 'No annotations yet. Add them after writing your SQL.'}</div>
+  </div>
+  <script type="application/json" data-annotations set:html={JSON.stringify(notes)}></script>
+  <script type="application/json" data-raw-code set:html={JSON.stringify(code)}></script>
+</section>
+<script>
+  for (const card of document.querySelectorAll('[data-code-card]')) {
+    const notes = JSON.parse(card.querySelector('[data-annotations]').textContent || '[]');
+    const code = JSON.parse(card.querySelector('[data-raw-code]').textContent || '""');
+    const display = card.querySelector('[data-note-display]');
+    const buttons = card.querySelectorAll('[data-line-button]');
+    let pinned = null;
+    const show = (line) => {
+      const matches = notes.filter((note) => note.start <= line && note.end >= line);
+      display.replaceChildren();
+      for (const note of matches) {
+        const article = document.createElement('article');
+        const title = document.createElement('strong'); title.textContent = note.title;
+        const why = document.createElement('p'); why.textContent = note.why;
+        article.append(title, why);
+        if (note.evidence) { const evidence = document.createElement('small'); evidence.textContent = note.evidence; article.append(evidence); }
+        display.append(article);
+      }
+      for (const button of buttons) button.classList.toggle('selected', Number(button.dataset.lineButton) === line);
+    };
+    for (const button of buttons) {
+      const line = Number(button.dataset.lineButton);
+      button.addEventListener('mouseenter', () => { if (pinned === null) show(line); });
+      button.addEventListener('focus', () => { if (pinned === null) show(line); });
+      button.addEventListener('click', () => { pinned = pinned === line ? null : line; if (pinned !== null) show(line); });
+    }
+    card.querySelector('[data-copy]')?.addEventListener('click', async (event) => {
+      await navigator.clipboard.writeText(code);
+      event.currentTarget.textContent = 'Copied';
+      setTimeout(() => { event.currentTarget.textContent = 'Copy SQL'; }, 1800);
+    });
+  }
+</script>
+<style>
+  .code-card{background:#172933;color:#dbe6e5;border-radius:16px;overflow:hidden;box-shadow:0 18px 42px #102c3618}.code-toolbar{display:flex;justify-content:space-between;align-items:center;padding:.75rem 1rem;background:#10232c;border-bottom:1px solid #314650}.filename{font:500 .75rem 'DM Mono',monospace;color:#cbdad8}.file-dot{display:inline-block;width:8px;height:8px;background:#5bc3af;border-radius:50%;margin-right:.6rem}.copy-button{background:transparent;border:1px solid #47616a;border-radius:6px;color:#dbe6e5;padding:.3rem .55rem;font-size:.72rem;cursor:pointer}.copy-button:hover{border-color:#9cddd1}.code-scroll{overflow:auto;padding:.8rem 0;max-height:430px}.code-line{min-width:max-content}.line-button{width:100%;display:flex;align-items:baseline;position:relative;border:0;background:transparent;color:inherit;padding:.13rem 1rem .13rem 0;text-align:left;white-space:pre;cursor:default;font:12px/1.55 'DM Mono',monospace}.line-button:focus-visible{outline:2px solid #64cdb9;outline-offset:-2px}.annotated .line-button{cursor:pointer}.annotated .line-button:hover,.line-button.selected{background:#294954}.line-number{flex:none;width:3.3rem;padding-right:.8rem;text-align:right;color:#718d96;user-select:none}.annotated .line-number{color:#6fe1ca}.line-content{flex:none}.note-dot{margin-left:1rem;color:#f2a274;font-size:.55rem}.line-tooltip{display:none;position:absolute;left:min(40vw,390px);top:90%;z-index:5;background:#fff;color:#16313b;border:1px solid #b6d8d0;border-radius:8px;padding:.55rem .7rem;max-width:340px;white-space:normal;box-shadow:0 10px 25px #0004;font:12px/1.4 'DM Sans',sans-serif}.annotated .line-button:hover .line-tooltip,.annotated .line-button:focus-visible .line-tooltip{display:block}.reasoning-panel{border-top:1px solid #3b5660;background:#122a33;padding:1rem 1.15rem;min-height:92px;font-size:.86rem}.reasoning-label{color:#72c6b8;font-size:.65rem;letter-spacing:.14em;font-weight:700;margin-bottom:.4rem}.reasoning-panel :global(article+article){margin-top:.8rem;border-top:1px solid #42606a;padding-top:.8rem}.reasoning-panel :global(p){margin:.18rem 0;color:#c4d2d1}.reasoning-panel :global(small){color:#8fb6b1}.empty-banner{padding:.65rem 1rem;color:#b4cbca;font-size:.78rem;background:#223c45;border-bottom:1px solid #314650}
+</style>

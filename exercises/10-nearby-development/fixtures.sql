@@ -1,0 +1,2 @@
+INSERT INTO premises VALUES ('subject',ST_GeomFromText('POINT(-79.38 43.65)',4326));
+INSERT INTO development_records VALUES (1,'self',ST_GeomFromText('POINT(-79.38 43.65)',4326),'2026-01-01'),(2,'self',ST_GeomFromText('POINT(-79.38 43.65)',4326),'2026-02-01'),(3,'near',ST_GeomFromText('POINT(-79.379 43.65)',4326),'2026-01-01'),(4,'near',ST_GeomFromText('POINT(-79.379 43.65)',4326),'2026-02-01'),(5,'far',ST_GeomFromText('POINT(-79.3 43.7)',4326),'2026-01-01');

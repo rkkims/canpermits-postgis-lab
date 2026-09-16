@@ -1,0 +1,1 @@
+INSERT INTO incoming_areas VALUES ('valid',ST_GeomFromText('POLYGON((0 0,2 0,2 2,0 2,0 0))',4326)),('bowtie',ST_GeomFromText('POLYGON((0 0,2 2,0 2,2 0,0 0))',4326)),('empty',ST_GeomFromText('POLYGON EMPTY',4326)),('missing',NULL);

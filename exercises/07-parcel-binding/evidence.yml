@@ -1,0 +1,12 @@
+source:
+  label: Toronto property boundaries
+  url: https://open.toronto.ca/dataset/property-boundaries/
+  relation: Parcel source used by the Toronto loader.
+before:
+  title: Input fixture
+  description: Synthetic rows supplied with the exercise. The fixture SQL is shown
+    below; add a CSV snapshot when a tabular view helps.
+after:
+  title: Result of my SQL
+  description: Add your own after.csv or an image once you have solved and validated
+    the exercise.

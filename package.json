@@ -1,0 +1,17 @@
+{
+  "name": "canpermits-postgis-lab",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check:content": "node scripts/check-content.mjs"
+  },
+  "dependencies": {
+    "astro": "^7.3.3",
+    "csv-parse": "^7.0.2",
+    "shiki": "^4.4.3",
+    "yaml": "^2.9.1"
+  }
+}

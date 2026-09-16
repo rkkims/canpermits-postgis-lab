@@ -1,0 +1,28 @@
+---
+const { title, description = 'PostGIS engineering problems from CanPermits' } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title} · CanPermits Spatial Lab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href={`${base}/`} aria-label="CanPermits Spatial Lab home"><span class="brand-mark">◈</span><span>CanPermits <strong>Spatial Lab</strong></span></a>
+      <nav aria-label="Primary"><a href={`${base}/#curriculum`}>Curriculum</a><a href={`${base}/about/`}>How it works</a><a href="https://github.com/rkkims/canpermits-postgis-lab">GitHub ↗</a></nav>
+    </header>
+    <main><slot /></main>
+    <footer class="site-footer"><span>CanPermits Spatial Lab</span><span>Real engineering questions. Independent SQL. Documented decisions.</span></footer>
+  </body>
+</html>
+<style is:global>
+  :root{--ink:#102c36;--muted:#5d7378;--line:#d4e0dc;--paper:#f8f8f2;--panel:#fff;--aqua:#b6eee3;--teal:#167a77;--orange:#e56840;--dark:#10262e}
+  *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif;line-height:1.55}a{color:inherit}button{font:inherit}.site-header{display:flex;justify-content:space-between;align-items:center;padding:1rem max(4vw,24px);border-bottom:1px solid var(--line);background:#fff;gap:2rem}.brand{font-size:1rem;text-decoration:none;font-weight:600;white-space:nowrap}.brand strong{font-weight:700}.brand-mark{color:var(--teal);font-size:1.55rem;vertical-align:-2px;margin-right:.45rem}.site-header nav{display:flex;gap:1.5rem;flex-wrap:wrap}.site-header nav a{text-decoration:none;color:var(--muted);font-size:.88rem}.site-header nav a:hover{color:var(--teal)}.site-footer{border-top:1px solid var(--line);padding:2rem max(4vw,24px);display:flex;justify-content:space-between;gap:1rem;color:var(--muted);font-size:.82rem}.eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:.72rem;font-weight:700;color:var(--teal)}h1,h2,h3{line-height:1.16}h1,h2{font-family:Fraunces,serif;font-weight:600}h1{font-size:clamp(2.7rem,5vw,5.3rem);letter-spacing:-.04em;margin:.7rem 0 1rem}h2{font-size:clamp(1.8rem,2.7vw,2.7rem);letter-spacing:-.025em}h3{font-size:1.05rem}.muted{color:var(--muted)}.button{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:.7rem 1.15rem;border:1px solid var(--ink);background:var(--ink);color:white;text-decoration:none;font-weight:600;font-size:.86rem;cursor:pointer}.button.secondary{background:transparent;color:var(--ink)}.button:hover{transform:translateY(-1px)}.pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.25rem .6rem;font-size:.72rem;font-weight:700;letter-spacing:.03em;color:var(--muted)}.mono{font-family:'DM Mono',monospace}@media(max-width:720px){.site-header{align-items:flex-start;flex-direction:column;gap:.5rem}.site-header nav{gap:1rem}.site-footer{flex-direction:column}}
+</style>

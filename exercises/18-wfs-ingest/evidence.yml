@@ -1,0 +1,12 @@
+source:
+  label: BC Open Maps WFS
+  url: https://www2.gov.bc.ca/gov/content/data/finding-and-sharing/bc-geographic-warehouse
+  relation: Provincial WFS source family used by the client.
+before:
+  title: Input fixture
+  description: Synthetic rows supplied with the exercise. The fixture SQL is shown
+    below; add a CSV snapshot when a tabular view helps.
+after:
+  title: Result of my SQL
+  description: Add your own after.csv or an image once you have solved and validated
+    the exercise.

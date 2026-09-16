@@ -1,0 +1,1 @@
+INSERT INTO incoming_pages VALUES (1,'F1','{"type":"Point","coordinates":[0.5,0.5]}','{}'),(1,'F2','{"type":"Point","coordinates":[1.5,0.5]}','{}'),(2,'F2','{"type":"Point","coordinates":[1.5,0.5]}','{}'),(2,'F3','{"type":"Point","coordinates":[2.5,0.5]}','{}');
