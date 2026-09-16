@@ -7,7 +7,7 @@
 
 ## Real CanPermits context
 
-Area assignment depends on point-in-polygon semantics.
+CanPermits assigns geocoded permits to neighbourhoods and address points to parcels or constraint areas. A point exactly on a polygon edge can behave differently from a point in its interior, and two neighbouring polygons may claim the same edge. That decision affects which area a user sees in a permit dossier and how unmatched records are counted.
 
 ## Learning objective
 

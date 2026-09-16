@@ -7,7 +7,7 @@
 
 ## Real CanPermits context
 
-Dossier radius searches use metres, while existing indexes may target a different expression.
+CanPermits answers many 'what is nearby?' questions from permit points stored in EPSG:4326. The dossier measures radius and distance in metres, and those queries run repeatedly for many premises; a spatial index on a different geometry expression does not necessarily accelerate them. A dedicated index migration exists because the query plan and response time mattered at production scale.
 
 ## Learning objective
 

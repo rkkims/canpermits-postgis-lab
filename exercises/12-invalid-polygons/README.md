@@ -7,7 +7,7 @@
 
 ## Real CanPermits context
 
-Public GIS polygons can self-intersect; repair can change topology and type.
+Public GIS polygons are not guaranteed to satisfy PostGIS validity rules. A self-intersection may prevent insertion into a typed zoning or parcel table, while repairing it may create several polygon parts or discard non-area pieces. CanPermits must decide whether the repaired shape still represents the source feature and preserve an audit trail for rejected or changed rows.
 
 ## Learning objective
 

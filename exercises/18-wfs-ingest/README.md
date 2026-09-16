@@ -7,7 +7,7 @@
 
 ## Real CanPermits context
 
-A provincial WFS client requests bbox-clipped, paginated GIS features.
+CanPermits retrieves some provincial GIS layers through the BC Geographic Warehouse WFS service. The client requests a city-sized bounding box, an explicit CRS, and multiple pages rather than downloading all provincial features. Those network choices become database correctness questions when pages fail, features repeat, or a source changes while an ingest run is in progress.
 
 ## Learning objective
 

@@ -7,7 +7,7 @@
 
 ## Real CanPermits context
 
-Citywide endpoints fetch zoning features inside a user viewport.
+The citywide zoning overlay fetches only features relevant to the map viewport, then serializes polygon geometry for the browser. A viewport can cross polygon edges and range from a few blocks to a whole city. CanPermits must keep the database filter index-friendly while balancing map detail, transfer size, and correct inclusion of partial features.
 
 ## Learning objective
 

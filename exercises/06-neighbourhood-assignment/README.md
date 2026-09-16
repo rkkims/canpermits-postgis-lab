@@ -7,7 +7,7 @@
 
 ## Real CanPermits context
 
-Geocoded permits receive neighbourhood and territory IDs.
+After permits acquire geometry, CanPermits attaches neighbourhood and territory IDs for area dashboards and permit browsing. The candidate polygons are scoped to the permit's municipality because nearby Canadian cities can share edges or have overlapping map extents. A missing point or uncertain polygon match must remain visible in data-quality counts rather than quietly becoming a misleading area assignment.
 
 ## Learning objective
 

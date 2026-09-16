@@ -7,7 +7,7 @@
 
 ## Real CanPermits context
 
-Complex hazard and constraint polygons can make parcel intersections costly.
+Toronto constraint layers include large, detailed polygons that are intersected with many parcel footprints. Even when a spatial index narrows candidates, exact intersection against a very complex shape can dominate runtime. CanPermits prepares smaller geometry pieces for this hot path, which creates a second obligation: the final parcel coverage must not be double-counted.
 
 ## Learning objective
 

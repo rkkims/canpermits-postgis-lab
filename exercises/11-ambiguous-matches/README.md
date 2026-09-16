@@ -7,7 +7,7 @@
 
 ## Real CanPermits context
 
-Area layers can overlap or meet at edges, yielding zero or several spatial matches.
+Several CanPermits spatial assignments assume an area layer can identify one answer for a point. In practice, adjacent neighbourhoods share edges, parcel polygons may overlap, and source layers can contain duplicate features. A query that returns the first match can make the result depend on row order, so ambiguous and unmatched outcomes deserve their own status.
 
 ## Learning objective
 

@@ -7,7 +7,7 @@
 
 ## Real CanPermits context
 
-Municipal boundaries and zoning feeds contain single and multipart polygons.
+Statistics Canada municipality outlines and municipal zoning layers do not all have the same polygon shape: a city may have one connected area, islands, or disjoint pieces. CanPermits stores these as typed PostGIS geometries so downstream map and spatial-join code sees a predictable family of shapes. The economic source-layer schema also had to accommodate non-polygon source layers, showing why geometry type belongs in the ingestion contract.
 
 ## Learning objective
 

@@ -7,7 +7,7 @@
 
 ## Real CanPermits context
 
-Toronto and Victoria address points are associated with parcel polygons.
+Toronto and Victoria parcel datasets provide polygon footprints that CanPermits uses to connect an address-level premise to a physical parcel. That connection supports later parcel zoning and property context in the dossier. Address points can fall in gaps, overlap parcels, or sit on a boundary, so the binding step needs an explicit way to handle more than one candidate or no candidate.
 
 ## Learning objective
 

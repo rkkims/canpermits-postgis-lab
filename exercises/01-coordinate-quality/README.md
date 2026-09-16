@@ -7,7 +7,7 @@
 
 ## Real CanPermits context
 
-Permit locations arrive from feeds and geocoders.
+CanPermits stores permit locations from two routes: coordinates supplied by a municipal feed and points returned by a geocoder. Both reach the same `permits.geom` column, so a plausible-looking number pair can corrupt map bounds, neighbourhood assignment, and nearby searches if its order or location is wrong. A past source-coordinate incident prompted a shared location sanity check before rows enter the main table.
 
 ## Learning objective
 

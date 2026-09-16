@@ -7,7 +7,7 @@
 
 ## Real CanPermits context
 
-The map uses Statistics Canada city outlines separate from permit-derived map rectangles.
+The citywide map needs an actual municipal outline, so CanPermits imports Statistics Canada 2021 census subdivision boundaries by city and province. The application also has rectangular map extents calculated from permit points, but those rectangles have a different purpose and refresh cadence. The imported boundary therefore needs a stable source identity, version trail, and geometry suitable for display and spatial checks.
 
 ## Learning objective
 

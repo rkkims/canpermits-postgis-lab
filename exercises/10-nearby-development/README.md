@@ -7,7 +7,7 @@
 
 ## Real CanPermits context
 
-Address dossiers show nearby permits and applications in metres.
+The address dossier summarizes nearby development activity around a subject location. One construction site can produce several permit or application records, while a record at the subject's own address should not automatically count as a nearby site. CanPermits therefore needs distance in metres, a reproducible site count, and a nearest-results list that agrees with that count.
 
 ## Learning objective
 

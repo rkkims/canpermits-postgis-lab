@@ -7,7 +7,7 @@
 
 ## Real CanPermits context
 
-A source ID can label distant parcel polygons and corrupt parcel-level zoning.
+In the parcel and zoning workflow, CanPermits encountered a source parcel identifier reused for unrelated physical polygons. Aggregating zoning solely by that identifier would combine zones from distant locations and incorrectly label premises as split-zoned. The exercise asks you to prove when a source key is safe to use as a physical-parcel key and to define what happens when it is not.
 
 ## Learning objective
 

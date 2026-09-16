@@ -7,7 +7,7 @@
 
 ## Real CanPermits context
 
-City zoning layers are loaded from source-specific GIS feeds into typed tables.
+CanPermits loads zoning areas from several municipal GIS portals into PostGIS tables that the citywide map and property dossier can query. Feed records carry source IDs, designations, dates, raw attributes, and polygon geometry, but some rows are incomplete or topologically invalid. The loader must make reruns auditable while preserving enough source detail to explain a displayed zone later.
 
 ## Learning objective
 

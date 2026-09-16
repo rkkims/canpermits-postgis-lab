@@ -7,7 +7,7 @@
 
 ## Real CanPermits context
 
-Property dossiers need to distinguish split zoning from mere polygon contact.
+A CanPermits premise may occupy a parcel touched by several zoning polygons. The dossier needs to distinguish a genuinely split-zoned parcel from one that merely meets another zone at its edge or has a tiny overlay sliver. The source zoning designations should remain traceable while the parcel-level result stays understandable to a reader.
 
 ## Learning objective
 

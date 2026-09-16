@@ -7,7 +7,7 @@
 
 ## Real CanPermits context
 
-Some GIS sources arrive in projected coordinates while core tables use EPSG:4326.
+CanPermits combines GIS layers published through shapefiles, WFS, and ArcGIS services. A source may return projected coordinates while the core permit and boundary tables store EPSG:4326 geometry; comparing those numbers without CRS handling makes spatial matches meaningless. The Toronto constraint loader checks staging-layer SRIDs, and the BC WFS client requests a declared output CRS, making this a real ingestion boundary rather than an isolated projection exercise.
 
 ## Learning objective
 

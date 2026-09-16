@@ -7,7 +7,7 @@
 
 ## Real CanPermits context
 
-Map extents are derived from permits; authoritative city boundaries are separate polygons.
+CanPermits keeps a small table of city map extents derived from permit coordinates to frame and filter citywide views. Separately, it stores authoritative municipal boundary polygons for the actual city shape. A rectangular extent can include places outside the municipality and can be distorted by an erroneous permit point, so the two datasets must not be treated as interchangeable evidence of jurisdiction.
 
 ## Learning objective
 
