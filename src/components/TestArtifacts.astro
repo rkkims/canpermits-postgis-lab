@@ -1,0 +1,32 @@
+---
+const { exercise } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const inputTables = Object.entries(exercise.testInput.tables);
+const [firstTableName, firstTableRows] = inputTables.find(([, rows]) => rows.length) ?? ['', []];
+const inputRows = firstTableRows.slice(0, 5);
+const inputColumns = Object.keys(inputRows[0] ?? {});
+const outputRows = exercise.testOutputRows.slice(0, 8);
+const columns = exercise.testOutputColumns;
+const inputUrl = `${base}/files/${exercise.folder}/test-input.json`;
+const fixtureUrl = `${base}/files/${exercise.folder}/fixtures.sql`;
+const outputUrl = `${base}/files/${exercise.folder}/test-output.csv`;
+---
+<div class="artifact-grid">
+  <article class="artifact-card">
+    <div class="artifact-top"><span class="artifact-step">INPUT DATA</span><span class="artifact-count">{inputTables.length} {inputTables.length === 1 ? 'table' : 'tables'}</span></div>
+    <h3>Head of input data</h3>
+    <p>First {inputRows.length} rows of <code>{firstTableName}</code>. The full JSON contains every table loaded by the fixture.</p>
+    <div class="input-scroll"><table><thead><tr>{inputColumns.map((column) => <th>{column}</th>)}</tr></thead><tbody>{inputRows.map((row) => <tr>{inputColumns.map((column) => <td>{row?.[column] == null ? 'NULL' : String(row[column])}</td>)}</tr>)}</tbody></table></div>
+    <div class="file-links"><a class="file-link" href={inputUrl} download="test-input.json">Download actual input data <span aria-hidden="true">↗</span></a><a class="file-link" href={fixtureUrl} download="fixtures.sql">Download runnable fixture SQL <span aria-hidden="true">↗</span></a></div>
+  </article>
+  <article class="artifact-card output">
+    <div class="artifact-top"><span class="artifact-step">OUTPUT DATA</span><span class="artifact-count">{exercise.testOutputRows.length ? `first ${outputRows.length} rows` : 'awaiting your run'}</span></div>
+    <h3>Head of output data</h3>
+    <p>Add rows to <code>test-output.csv</code> after running your SQL. Its columns can match the result you choose to report.</p>
+    {outputRows.length ? <div class="output-scroll"><table><thead><tr>{columns.map((column) => <th>{column}</th>)}</tr></thead><tbody>{outputRows.map((row) => <tr>{columns.map((column) => <td>{row[column] || '—'}</td>)}</tr>)}</tbody></table></div> : <div class="pending-output">No output rows yet. The linked file is an empty template for your results.</div>}
+    <a class="file-link" href={outputUrl} download="test-output.csv">Download {outputRows.length ? 'actual output file' : 'output file template'} <span aria-hidden="true">↗</span></a>
+  </article>
+</div>
+<style>
+  .artifact-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;margin:1.5rem 0 2rem}.artifact-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:1.1rem;min-width:0}.artifact-card.output{background:#f1f8f4}.artifact-top{display:flex;justify-content:space-between;gap:.6rem;align-items:center}.artifact-step{font-size:.66rem;font-weight:700;letter-spacing:.12em;color:var(--teal)}.artifact-count{font:11px 'DM Mono',monospace;color:var(--muted)}.artifact-card h3{margin:.75rem 0 .4rem!important}.artifact-card p{font-size:.79rem;margin:.3rem 0 1rem;min-height:3.3rem}.pending-output{border:1px dashed #bad2c8;border-radius:7px;height:132px;display:flex;align-items:center;justify-content:center;padding:1rem;color:#6b8580;text-align:center;font-size:.79rem;margin-bottom:1rem}.file-links{display:flex;flex-wrap:wrap;gap:.35rem 1rem}.file-link{display:inline-flex;gap:.5rem;align-items:center;color:var(--teal);font-size:.8rem;font-weight:700;text-underline-offset:3px}.input-scroll,.output-scroll{height:132px;overflow:auto;margin-bottom:1rem}.input-scroll table,.output-scroll table{border-collapse:collapse;width:100%;font:11px/1.5 'DM Mono',monospace}.input-scroll th,.input-scroll td,.output-scroll th,.output-scroll td{text-align:left;white-space:nowrap;padding:.35rem .5rem;border-bottom:1px solid #d7e7dd}@media(max-width:760px){.artifact-grid{grid-template-columns:1fr}.artifact-card p{min-height:0}}
+</style>

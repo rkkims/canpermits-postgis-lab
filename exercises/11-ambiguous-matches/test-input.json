@@ -1,0 +1,32 @@
+{
+  "exercise": "11-ambiguous-matches",
+  "kind": "synthetic input snapshot",
+  "tables": {
+    "areas": [
+      {
+        "id": "A",
+        "geom": "SRID=4326;MULTIPOLYGON(((0 0,3 0,3 3,0 3,0 0)))",
+        "priority": 1
+      },
+      {
+        "id": "B",
+        "geom": "SRID=4326;MULTIPOLYGON(((2 0,5 0,5 3,2 3,2 0)))",
+        "priority": 1
+      }
+    ],
+    "points": [
+      {
+        "id": "overlap",
+        "geom": "SRID=4326;POINT(2.5 1)"
+      },
+      {
+        "id": "outside",
+        "geom": "SRID=4326;POINT(6 1)"
+      },
+      {
+        "id": "edge",
+        "geom": "SRID=4326;POINT(2 1)"
+      }
+    ]
+  }
+}

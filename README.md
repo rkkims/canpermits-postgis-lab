@@ -7,10 +7,11 @@ The public presentation is an Astro site built from these same files. Run `npm c
 ## Start
 
 1. Start a disposable database with `docker compose up -d`.
-2. Open an exercise `README.md` and run its `schema.sql` and `fixtures.sql` in a fresh scratch database or schema.
-3. Write your answer in `attempt.sql`; record observed results in `tests.md`.
-4. Use the populated `tests.md` cases to check your work and record observed results.
-5. Only after your attempt, inspect the source files listed in the prompt and write `reflection.md`.
+2. Open the exercise `README.md`. Preview the actual rows in `test-input.json`, then run `schema.sql` and `fixtures.sql` in a fresh scratch database. The JSON is a readable snapshot; the SQL files are what load the database.
+3. Write your answer in `attempt.sql` and run it in that database.
+4. Work through the prepared cases in `tests.md`, adding any extra input they request. Record observed results and pass/fail there. Save the result rows you want to show publicly in `test-output.csv`.
+5. Add line-specific explanations to `annotations.yml`. Use `evidence.yml` to attach before/after CSVs or images if useful.
+6. After your own attempt, inspect the CanPermits source files listed in the exercise and write `reflection.md`.
 
 Example for exercise 01, using a fresh database:
 
@@ -24,6 +25,8 @@ docker compose exec -T db psql -U lab -d lab_01 < exercises/01-coordinate-qualit
 Exercise schemas are independent. Keep each exercise in its own database so names and data cannot collide. The CanPermits source is at `../canpermits-reverse-engineering`; its implementation is an answer key to read later.
 
 There are 90 prepared test cases, five per exercise. Some have a fixed expected result; others ask you to document an engineering policy and verify that your SQL applies it consistently. Test cases describe inputs and observations, not completed SQL.
+
+The site’s test-case section shows the first rows of the actual input snapshot (`test-input.json`) and links to that full file and the runnable `fixtures.sql`. Every exercise also has `test-output.csv`, initially an empty template. After running your own SQL, replace its header or add rows with the result you want to present; the site will show its first rows and offer the full output file for download. Keep detailed reasoning and pass/fail notes in `tests.md`.
 
 ## Present your solution
 

@@ -1,0 +1,28 @@
+{
+  "exercise": "01-coordinate-quality",
+  "kind": "synthetic input snapshot",
+  "tables": {
+    "incoming_permits": [
+      {
+        "lat": 43.65,
+        "lon": -79.38,
+        "source_id": "A"
+      },
+      {
+        "lat": -79.38,
+        "lon": 43.65,
+        "source_id": "B"
+      },
+      {
+        "lat": 0,
+        "lon": 0,
+        "source_id": "C"
+      },
+      {
+        "lat": null,
+        "lon": null,
+        "source_id": "D"
+      }
+    ]
+  }
+}

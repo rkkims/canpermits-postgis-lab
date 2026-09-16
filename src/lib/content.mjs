@@ -1,6 +1,7 @@
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import YAML from 'yaml';
+import { parse as parseCsv } from 'csv-parse/sync';
 
 export const exerciseRoot = join(process.cwd(), 'exercises');
 const read = (path) => readFileSync(path, 'utf8');
@@ -39,6 +40,13 @@ export function listExercises() {
       const level = markdown.match(/\*\*Level:\*\* ([^\n]+)/)?.[1]?.trim() ?? '';
       const metadataPath = join(dir, 'evidence.yml');
       const evidence = existsSync(metadataPath) ? YAML.parse(read(metadataPath)) : {};
+      const testInputRaw = read(join(dir, 'test-input.json'));
+      const testInput = JSON.parse(testInputRaw);
+      if (testInput.exercise !== folder || !testInput.tables || !Object.keys(testInput.tables).length)
+        throw new Error(`${folder}: invalid test-input.json`);
+      const testOutput = read(join(dir, 'test-output.csv'));
+      const testOutputColumns = parseCsv(testOutput, { to_line: 1 })[0] ?? [];
+      const testOutputRows = parseCsv(testOutput, { columns: true, skip_empty_lines: true });
       return {
         folder, dir, number: match[1], title: match[2], level,
         context: section(markdown, 'Real CanPermits context'),
@@ -57,6 +65,7 @@ export function listExercises() {
         fixtures: read(join(dir, 'fixtures.sql')),
         attempt: read(join(dir, 'attempt.sql')),
         tests: parseTestCases(read(join(dir, 'tests.md')), folder),
+        testInputRaw, testInput, testOutput, testOutputColumns, testOutputRows,
         evidence,
       };
     }).sort((a, b) => a.number.localeCompare(b.number));

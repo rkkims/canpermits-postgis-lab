@@ -1,0 +1,24 @@
+{
+  "exercise": "02-crs-normalization",
+  "kind": "synthetic input snapshot",
+  "tables": {
+    "reference_points": [
+      {
+        "id": "reference",
+        "geom": "SRID=4326;POINT(-79.39 43.64)"
+      }
+    ],
+    "source_points": [
+      {
+        "id": "known",
+        "geom": "SRID=26917;POINT(630000 4832000)",
+        "source_srid": 26917
+      },
+      {
+        "id": "unknown",
+        "geom": "POINT(630000 4832000)",
+        "source_srid": null
+      }
+    ]
+  }
+}

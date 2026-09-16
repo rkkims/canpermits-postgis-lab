@@ -1,0 +1,56 @@
+{
+  "exercise": "18-wfs-ingest",
+  "kind": "synthetic input snapshot",
+  "tables": {
+    "incoming_pages": [
+      {
+        "page_no": 1,
+        "payload": {},
+        "source_id": "F1",
+        "geometry_json": {
+          "type": "Point",
+          "coordinates": [
+            0.5,
+            0.5
+          ]
+        }
+      },
+      {
+        "page_no": 1,
+        "payload": {},
+        "source_id": "F2",
+        "geometry_json": {
+          "type": "Point",
+          "coordinates": [
+            1.5,
+            0.5
+          ]
+        }
+      },
+      {
+        "page_no": 2,
+        "payload": {},
+        "source_id": "F2",
+        "geometry_json": {
+          "type": "Point",
+          "coordinates": [
+            1.5,
+            0.5
+          ]
+        }
+      },
+      {
+        "page_no": 2,
+        "payload": {},
+        "source_id": "F3",
+        "geometry_json": {
+          "type": "Point",
+          "coordinates": [
+            2.5,
+            0.5
+          ]
+        }
+      }
+    ]
+  }
+}

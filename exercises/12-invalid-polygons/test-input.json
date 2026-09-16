@@ -1,0 +1,21 @@
+{
+  "exercise": "12-invalid-polygons",
+  "kind": "synthetic input snapshot",
+  "tables": {
+    "incoming_areas": [
+      {
+        "source_id": "valid",
+        "source_geom": "SRID=4326;POLYGON((0 0,2 0,2 2,0 2,0 0))"
+      },
+      {
+        "source_id": "bowtie",
+        "source_geom": "SRID=4326;POLYGON((0 0,2 2,0 2,2 0,0 0))"
+      },
+      {
+        "source_id": "empty",
+        "source_geom": "SRID=4326;POLYGON EMPTY"
+      },
+      null
+    ]
+  }
+}

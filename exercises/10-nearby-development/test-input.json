@@ -1,0 +1,44 @@
+{
+  "exercise": "10-nearby-development",
+  "kind": "synthetic input snapshot",
+  "tables": {
+    "development_records": [
+      {
+        "id": 1,
+        "geom": "SRID=4326;POINT(-79.38 43.65)",
+        "site_id": "self",
+        "event_date": "2026-01-01"
+      },
+      {
+        "id": 2,
+        "geom": "SRID=4326;POINT(-79.38 43.65)",
+        "site_id": "self",
+        "event_date": "2026-02-01"
+      },
+      {
+        "id": 3,
+        "geom": "SRID=4326;POINT(-79.379 43.65)",
+        "site_id": "near",
+        "event_date": "2026-01-01"
+      },
+      {
+        "id": 4,
+        "geom": "SRID=4326;POINT(-79.379 43.65)",
+        "site_id": "near",
+        "event_date": "2026-02-01"
+      },
+      {
+        "id": 5,
+        "geom": "SRID=4326;POINT(-79.3 43.7)",
+        "site_id": "far",
+        "event_date": "2026-01-01"
+      }
+    ],
+    "premises": [
+      {
+        "geom": "SRID=4326;POINT(-79.38 43.65)",
+        "slug": "subject"
+      }
+    ]
+  }
+}

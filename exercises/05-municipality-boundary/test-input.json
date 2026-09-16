@@ -1,0 +1,72 @@
+{
+  "exercise": "05-municipality-boundary",
+  "kind": "synthetic input snapshot",
+  "tables": {
+    "boundary_feed": [
+      {
+        "pruid": "59",
+        "csduid": "5901",
+        "csdname": "Victoria",
+        "geometry_json": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                0,
+                0
+              ],
+              [
+                2,
+                0
+              ],
+              [
+                2,
+                2
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                0,
+                0
+              ]
+            ]
+          ]
+        }
+      },
+      {
+        "pruid": "35",
+        "csduid": "3501",
+        "csdname": "Victoria",
+        "geometry_json": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                4,
+                0
+              ],
+              [
+                6,
+                0
+              ],
+              [
+                6,
+                2
+              ],
+              [
+                4,
+                2
+              ],
+              [
+                4,
+                0
+              ]
+            ]
+          ]
+        }
+      }
+    ]
+  }
+}

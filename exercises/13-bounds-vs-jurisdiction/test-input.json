@@ -1,0 +1,35 @@
+{
+  "exercise": "13-bounds-vs-jurisdiction",
+  "kind": "synthetic input snapshot",
+  "tables": {
+    "locations": [
+      {
+        "id": "inside",
+        "geom": "SRID=4326;POINT(0.5 0.5)"
+      },
+      {
+        "id": "rectangle_only",
+        "geom": "SRID=4326;POINT(3 3)"
+      },
+      {
+        "id": "outside",
+        "geom": "SRID=4326;POINT(5 3)"
+      }
+    ],
+    "municipality_boundary": [
+      {
+        "slug": "city",
+        "boundary": "SRID=4326;MULTIPOLYGON(((0 0,4 0,4 1,1 1,1 4,0 4,0 0)))"
+      }
+    ],
+    "municipality_map_bounds": [
+      {
+        "slug": "city",
+        "ne_lat": 4,
+        "ne_lng": 4,
+        "sw_lat": 0,
+        "sw_lng": 0
+      }
+    ]
+  }
+}
